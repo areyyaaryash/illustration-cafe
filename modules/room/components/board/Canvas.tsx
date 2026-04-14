@@ -74,7 +74,7 @@ const Canvas = () => {
         width={CANVAS_SIZE.width}
         height={CANVAS_SIZE.height}
         className={`absolute top-0 z-10 ${dragging && "cursor-move"}`}
-        style={{ x, y }}
+        style={{ x, y, touchAction: "none" }}
         // DRAG
         drag={dragging}
         dragConstraints={{
@@ -91,16 +91,26 @@ const Canvas = () => {
         onMouseMove={(e) => {
           handleDraw(e.clientX, e.clientY, e.shiftKey);
         }}
-        onTouchStart={(e) =>
+        onTouchStart={(e) => {
+          e.preventDefault();
           handleStartDrawing(
             e.changedTouches[0].clientX,
             e.changedTouches[0].clientY
-          )
-        }
-        onTouchEnd={handleEndDrawing}
-        onTouchMove={(e) =>
-          handleDraw(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
-        }
+          );
+        }}
+        
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handleEndDrawing();
+        }}
+        
+        onTouchMove={(e) => {
+          e.preventDefault();
+          handleDraw(
+            e.changedTouches[0].clientX,
+            e.changedTouches[0].clientY
+          );
+        }}
       />
       <Background bgRef={bgRef} />
 

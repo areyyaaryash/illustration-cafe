@@ -358,3 +358,6 @@ body {
   position: relative;
   transition: transform 0.2s ease;
 }
+canvas {
+  touch-action: none;
+}
