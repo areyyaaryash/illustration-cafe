@@ -1,19 +1,29 @@
-import { Html, Main, NextScript, Head } from "next/document";
+import { Head, Html, Main, NextScript } from "next/document";
 
-const document = () => (
-  <Html>
+const Document = () => (
+  <Html lang="en">
     <Head>
+      
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
-        crossOrigin="allow"
+        crossOrigin="anonymous"
       />
+
       <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-      />
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap"
+  rel="stylesheet"
+/>
+
+      
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
     </Head>
+
     <body>
       <div id="portal"></div>
       <Main />
@@ -22,4 +32,4 @@ const document = () => (
   </Html>
 );
 
-export default document;
+export default Document;

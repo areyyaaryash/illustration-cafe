@@ -55,32 +55,47 @@ const NameInput = () => {
   };
 
   return (
-    <form
-      className="my-24 flex flex-col items-center"
-      onSubmit={handleJoinRoom}
-    >
-      <h1 className="text-5xl font-extrabold leading-tight sm:text-extra">
-        Collabio
-      </h1>
-      <h3 className="text-xl sm:text-2xl">Real-time whiteboard</h3>
-
-      <div className="mt-10 mb-3 flex flex-col gap-2">
-        <label className="self-start font-bold leading-tight">
-          Enter your name
-        </label>
-        <input
-          className="rounded-xl border p-5 py-1"
-          id="room-id"
-          placeholder="Username..."
-          value={name}
-          onChange={(e) => setName(e.target.value.slice(0, 15))}
-        />
-      </div>
-
-      <button className="btn" type="submit">
-        Enter room
-      </button>
-    </form>
+    <div className="page">
+  
+      
+      <video autoPlay muted loop playsInline className="video-bg">
+        <source src="/bg.mp4" type="video/mp4" />
+      </video>
+  
+      
+      <div className="overlay" />
+  
+      
+      <form
+        className="glass-container"
+        onSubmit={handleJoinRoom}
+      >
+  
+        
+        <h1 className="title">
+          Illustration Café <span className="logo">☕</span>
+        </h1>
+  
+        <p className="subtitle">Fresh ideas brewed live</p>
+  
+        
+        <div className="input-group">
+          <label>Enter your name</label>
+          <input
+            className="input"
+            placeholder="Username..."
+            value={name}
+            onChange={(e) => setName(e.target.value.slice(0, 15))}
+          />
+        </div>
+  
+        
+        <button className="btn-primary" type="submit">
+          Enter Room
+        </button>
+  
+      </form>
+    </div>
   );
 };
 

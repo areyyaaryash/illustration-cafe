@@ -19,21 +19,30 @@ const Chat = () => {
 
   const [newMsg, setNewMsg] = useState(false);
   const [opened, setOpened] = useState(false);
+
   const [msgs, handleMsgs] = useList<Message>([]);
 
   useEffect(() => {
     const handleNewMsg = (userId: string, msg: string) => {
-      const user = room.users.get(userId);
+      console.log("RECEIVED:", userId, msg); 
+
+      const user = room.users?.get(userId);
 
       handleMsgs.push({
         userId,
         msg,
-        id: msgs.length + 1,
+        id: Date.now(), 
         username: user?.name || "Anonymous",
         color: user?.color || "#000",
       });
 
-      msgList.current?.scroll({ top: msgList.current?.scrollHeight });
+      
+      setTimeout(() => {
+        msgList.current?.scrollTo({
+          top: msgList.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 0);
 
       if (!opened) setNewMsg(true);
     };
@@ -43,7 +52,7 @@ const Chat = () => {
     return () => {
       socket.off("new_msg", handleNewMsg);
     };
-  }, [handleMsgs, msgs, opened, room.users]);
+  }, [handleMsgs, opened, room.users]); 
 
   return (
     <motion.div
@@ -75,12 +84,14 @@ const Chat = () => {
           <FaChevronDown />
         </motion.div>
       </button>
+
       <div className="flex flex-1 flex-col justify-between bg-white p-3">
         <div className="h-[190px] overflow-y-scroll pr-2" ref={msgList}>
           {msgs.map((msg) => (
             <Message key={msg.id} {...msg} />
           ))}
         </div>
+
         <ChatInput />
       </div>
     </motion.div>

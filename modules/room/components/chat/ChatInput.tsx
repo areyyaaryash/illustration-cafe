@@ -1,7 +1,5 @@
 import { FormEvent, useState } from "react";
-
 import { AiOutlineSend } from "react-icons/ai";
-
 import { socket } from "@/common/lib/socket";
 
 const ChatInput = () => {
@@ -10,19 +8,31 @@ const ChatInput = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!msg.trim()) return;
+
     socket.emit("send_msg", msg);
 
     setMsg("");
   };
 
   return (
-    <form className="flex w-full items-center gap-2" onSubmit={handleSubmit}>
+    <form
+      className="flex w-full items-center gap-2"
+      onSubmit={handleSubmit}
+    >
       <input
-        className="w-full rounded-xl border border-zinc-300 p-5 py-1"
+        className="w-full rounded-xl border border-zinc-300 px-4 py-2
+                    text-black bg-white outline-none
+                    focus:ring-2 focus:ring-zinc-400"
         value={msg}
         onChange={(e) => setMsg(e.target.value)}
+        placeholder="Type a message..."
       />
-      <button className="btn-icon h-full w-10 bg-black" type="submit">
+
+      <button
+        className="btn-icon h-full w-10 bg-black text-white rounded-lg flex items-center justify-center"
+        type="submit"
+      >
         <AiOutlineSend />
       </button>
     </form>
