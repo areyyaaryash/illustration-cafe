@@ -16,7 +16,12 @@ nextApp.prepare().then(async () => {
   const app = express();
   const server = createServer(app);
 
-  const io = new Server<ClientToServerEvents, ServerToClientEvents>(server);
+  const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
 
   app.get("/health", async (_, res) => {
     res.send("Healthy");
@@ -164,7 +169,7 @@ nextApp.prepare().then(async () => {
 
   app.all("*", (req: any, res: any) => nextHandler(req, res));
 
-  server.listen(port, () => {
+  server.listen(port, "0.0.0.0" , () => {
     // eslint-disable-next-line no-console
     console.log(`> Ready on http://localhost:${port}`);
   });
