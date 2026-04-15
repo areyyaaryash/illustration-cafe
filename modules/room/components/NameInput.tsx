@@ -55,30 +55,34 @@ const NameInput = () => {
   };
 
   return (
-    <div className="page">
+    <div className="page relative h-screen w-full overflow-hidden">
   
       
-      <video autoPlay muted loop playsInline className="video-bg">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
         <source src="/bg.mp4" type="video/mp4" />
       </video>
   
       
-      <div className="overlay" />
+      <div className="overlay absolute inset-0 bg-black/30 z-10" />
   
       
       <form
-        className="glass-container"
+        className="glass-container relative z-20"
         onSubmit={handleJoinRoom}
       >
   
-        
         <h1 className="title">
           Illustration Café <span className="logo">☕</span>
         </h1>
   
         <p className="subtitle">Fresh ideas brewed live</p>
   
-        
         <div className="input-group">
           <label>Enter your name</label>
           <input
@@ -89,7 +93,6 @@ const NameInput = () => {
           />
         </div>
   
-        
         <button className="btn-primary" type="submit">
           Enter Room
         </button>
